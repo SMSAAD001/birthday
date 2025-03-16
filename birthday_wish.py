@@ -71,7 +71,7 @@ def main():
                 """
                 ## ❤️ A Special Letter to You ❤️
                 
-                My Dearest Naba,Laddu lu, Shonu lu, Janu lu
+                My Dearest Naba,
 
 On this wonderful day, I just want to remind you how incredibly special you are to me. Every moment with you is a blessing, and I cherish every laugh, every memory, and every dream we share.
 
