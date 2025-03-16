@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import base64
 
 def main():
     st.set_page_config(page_title="Happy Birthday Naba!", page_icon="🎉")
@@ -22,12 +23,48 @@ def main():
     
     if password == "safa":
         if st.button("Open Surprise 🎁"):
-            st.markdown("<div style='width:100%; height:50px; background:white;'></div>", unsafe_allow_html=True)
             time.sleep(1)
             
-            # Display Single Image from URL with Fixed Size
+            # Display Grid Image with Animated Light Effect
             image_url = "https://res.cloudinary.com/di2nwhfma/image/upload/v1742115481/ag316aascsygct4dpelp.jpg"
-            st.image(image_url, caption="With Love, Saad ❤️", width=300)
+            
+            st.markdown(f"""
+            <style>
+            .image-container {{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }}
+            .animated-image {{
+                width: 300px;
+                border-radius: 20px;
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+                animation: glow 1.5s infinite alternate;
+            }}
+            @keyframes glow {{
+                0% {{ box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }}
+                100% {{ box-shadow: 0 0 30px rgba(255, 215, 0, 1); }}
+            }}
+            </style>
+            <div class="image-container">
+                <img src="{image_url}" class="animated-image">
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Load Local MP3 File and Convert to Base64
+            audio_file = "tu_hi_haqeeqat.mp3"  # Ensure this file is in the same folder
+            with open(audio_file, "rb") as file:
+                audio_bytes = file.read()
+                audio_base64 = base64.b64encode(audio_bytes).decode()
+
+            # Autoplay Audio with Base64 Encoding
+            st.markdown(f"""
+            <audio autoplay controls>
+                <source src="data:audio/mp3;base64,{audio_base64}" type="audio/mp3">
+                Your browser does not support the audio element.
+            </audio>
+            """, unsafe_allow_html=True)
             
             # Display Birthday Message
             st.markdown(
@@ -44,9 +81,8 @@ Laddu lu, Shonu lu, Janu lu, you are my sweetest happiness, my heart’s favorit
 
 May this day bring you all the joy and happiness you deserve, and may our love continue to grow deeper with each heartbeat.
 
-With all my love, forever and always,
+With all my love, forever and always,  
 Saad ❤️
-                
                 """
             )
             
